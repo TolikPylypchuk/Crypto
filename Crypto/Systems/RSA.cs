@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
+using Crypto.Infrastructure;
+
 using RSAKey = Crypto.Key<(int N, int Value)>;
 
 namespace Crypto.Systems

@@ -1,9 +1,11 @@
 ﻿using System;
 
+using Crypto.Infrastructure;
+
 using SimpleSubstitutionKey = Crypto.Key<(string From, string To)>;
 using RSAKey = Crypto.Key<(int N, int Value)>;
 
-namespace Crypto
+namespace Crypto.Keys
 {
 	/// <summary>
 	/// Contains helper methods for key generation.

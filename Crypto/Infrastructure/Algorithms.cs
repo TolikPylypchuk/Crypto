@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Crypto
+namespace Crypto.Infrastructure
 {
 	public static class Algorithms
 	{

@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Crypto.Tests
+using Crypto.Infrastructure;
+
+namespace Crypto.Tests.Infrastructure
 {
 	[TestClass]
 	public class AlgorithmsTests

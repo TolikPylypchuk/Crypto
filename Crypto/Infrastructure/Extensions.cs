@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Crypto
+namespace Crypto.Infrastructure
 {
 	/// <summary>
 	/// Contains extension methods for various classes.
@@ -34,5 +34,28 @@ namespace Crypto
 		/// <returns>The number of digits of n.</returns>
 		public static int NumberOfDigits(this int n)
 			=> (int)Math.Log10(n) + 1;
+
+		/// <summary>
+		/// Checks whether the number is prime.
+		/// </summary>
+		/// <param name="n">The number check.</param>
+		/// <returns>
+		/// <c>true</c> if the number is prime.
+		/// Otherwise, false.
+		/// </returns>
+		public static bool IsPrime(this int n)
+		{
+			int root = (int)Math.Sqrt(n);
+
+			for (int i = 2; i <= root; i++)
+			{
+				if (n % i == 0)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
 	}
 }

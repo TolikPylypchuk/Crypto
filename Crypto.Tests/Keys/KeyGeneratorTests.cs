@@ -2,9 +2,11 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using Crypto.Keys;
+
 using SimpleSubstitutionKey = Crypto.Key<(string From, string To)>;
 
-namespace Crypto.Tests
+namespace Crypto.Tests.Keys
 {
 	[TestClass]
 	public class KeyGeneratorTests

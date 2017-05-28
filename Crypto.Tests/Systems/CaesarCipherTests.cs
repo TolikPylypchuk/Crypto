@@ -4,6 +4,7 @@ using System.Linq;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using Crypto.Keys;
 using Crypto.Systems;
 
 namespace Crypto.Tests.Systems
