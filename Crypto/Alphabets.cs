@@ -10,18 +10,51 @@ namespace Crypto
 	{
 		static Alphabets()
 		{
-			EnglishUpper = new Alphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-			EnglishLower = new Alphabet("abcdefghijklmnopqrstuvwxyz");
+			EnglishUpper = new Alphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+			{
+				Name = "Англійський (великі букви)"
+			};
+
+			EnglishLower = new Alphabet("abcdefghijklmnopqrstuvwxyz")
+			{
+				Name = "Англійський (малі букви)"
+			};
+
 			English = EnglishUpper + EnglishLower;
+			English.Name = "Англійський";
 
-			UkrainianUpper = new Alphabet("АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ");
-			UkrainianLower = new Alphabet("абвгґдеєжзиіїйклмнопрстуфхцчшщьюя");
+			UkrainianUpper = new Alphabet("АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ")
+			{
+				Name = "Український (великі букви)"
+			};
+
+			UkrainianLower = new Alphabet("абвгґдеєжзиіїйклмнопрстуфхцчшщьюя")
+			{
+				Name = "Український (малі букви)"
+			};
+
 			Ukrainian = UkrainianUpper + UkrainianLower;
+			Ukrainian.Name = "Український";
 
-			Punctuation = new Alphabet(" .,;:!?/\\'\"-()`");
-			DecimalDigits = new Alphabet("0123456789");
-			BinaryDigits = new Alphabet("01");
-			SpecialCharacters = new Alphabet("[]{}<>~@#$%^&*-_+=");
+			Punctuation = new Alphabet(" .,;:!?/\\'\"-()`")
+			{
+				Name = "Пунктуація"
+			};
+
+			DecimalDigits = new Alphabet("0123456789")
+			{
+				Name = "Цифри"
+			};
+
+			BinaryDigits = new Alphabet("01")
+			{
+				Name = "Бінарні цифри"
+			};
+
+			SpecialCharacters = new Alphabet("[]{}<>~@#$%^&*-_+=")
+			{
+				Name = "Спеціальні символи"
+			};
 
 			EnglishWithPunctuation = English + Punctuation;
 			UkrainianWithPunctuation = Ukrainian + Punctuation;

@@ -51,6 +51,11 @@ namespace Crypto
 		}
 
 		/// <summary>
+		/// Gets or sets the name of the alphabet.
+		/// </summary>
+		public string Name { get; set; }
+
+		/// <summary>
 		/// Gets the number of characters in this alphabet.
 		/// </summary>
 		public int Length { get; }
@@ -77,7 +82,10 @@ namespace Crypto
 		/// <returns>A new alphabet which is a union of two alphabets.</returns>
 		/// <remarks>This operation is not commutative.</remarks>
 		public static Alphabet Union(Alphabet a1, Alphabet a2)
-			=> new Alphabet(a1.indices.Keys.Concat(a2.indices.Keys));
+			=> new Alphabet(a1.indices.Keys.Concat(a2.indices.Keys))
+			{
+				Name = $"{a1.Name} + {a2.Name}"
+			};
 
 		/// <summary>
 		/// Gets the character with the specified index.

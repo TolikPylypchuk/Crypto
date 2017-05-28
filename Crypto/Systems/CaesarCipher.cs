@@ -82,8 +82,11 @@ namespace Crypto.Systems
 				message.Select(
 						ch => this.Alphabet.Contains(ch)
 							? this.Alphabet[
-								(this.Alphabet.IndexOf(ch) + shift) %
-									this.Alphabet.Length]
+								(this.Alphabet.IndexOf(ch) + shift) < 0
+									? (this.Alphabet.IndexOf(ch) + shift +
+										this.Alphabet.Length)
+									: (this.Alphabet.IndexOf(ch) + shift) %
+										this.Alphabet.Length]
 							: ch)
 					.ToArray());
 

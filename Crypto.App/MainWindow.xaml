@@ -1,0 +1,110 @@
+﻿<Window x:Class="Crypto.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:app="clr-namespace:Crypto.App"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="Crypto" Height="375" Width="500" ResizeMode="CanMinimize">
+	<Window.DataContext>
+		<app:MainViewModel x:Name="model" />
+	</Window.DataContext>
+	
+	<TabControl>
+		<TabItem Header="Шифри" IsSelected="True">
+			<Grid Margin="10">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="2*" />
+					<RowDefinition Height="3*" />
+				</Grid.RowDefinitions>
+
+				<TabControl x:Name="cipherTabControl" Grid.Row="0"
+							SelectedValue="{Binding CurrentTab, Mode=OneWayToSource}">
+					<TabItem Header="Шифр Цезаря">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							
+							<TextBlock Grid.Column="0" HorizontalAlignment="Right"
+							           VerticalAlignment="Center" Margin="5">
+								Зміщення:
+							</TextBlock>
+							<TextBox x:Name="caesarTextBox" Grid.Column="1"
+							         HorizontalAlignment="Left"
+							         Width="50" VerticalAlignment="Center"
+									 Text="{Binding Path=Shift, Mode=TwoWay}" />
+						</Grid>
+					</TabItem>
+					<TabItem Header="Шифр простої заміни"
+							 Tag="SimpleSubstitutionCipher">
+
+					</TabItem>
+					<TabItem Header="Шифр Віженера" Tag="VisenereCipher">
+
+					</TabItem>
+					<TabItem Header="Шифр RSA" Tag="RSA">
+
+					</TabItem>
+				</TabControl>
+
+				<Grid Grid.Row="1">
+					<Grid.RowDefinitions>
+						<RowDefinition />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+
+					<ComboBox Grid.Column="0" HorizontalAlignment="Center"
+							  Grid.Row="0" VerticalAlignment="Center"
+							  ItemsSource="{Binding Path=AlphabetsList}"
+							  DisplayMemberPath="Name"
+							  SelectedIndex="0"
+							  SelectedItem="{Binding Path=Alphabet, Mode=TwoWay}" />
+
+					<ComboBox Name="ModeComboBox" Grid.Column="1" Grid.Row="0"
+							  HorizontalAlignment="Center" VerticalAlignment="Center"
+							  ItemsSource="{Binding Path=Actions}" SelectedIndex="0"
+							  SelectedItem="{Binding Path=Action, Mode=TwoWay}">
+					</ComboBox>
+
+					<CheckBox Grid.Column="2" HorizontalAlignment="Center"
+							  Grid.Row="0" VerticalAlignment="Center"
+							  IsChecked="{Binding Path=IsStrict, Mode=TwoWay}">
+						Строга перевірка
+					</CheckBox>
+
+					<StackPanel Grid.Column="0" Grid.Row="1" Margin="5">
+						<TextBlock Margin="2">Відкритий текст</TextBlock>
+						<TextBox x:Name="plaintextTextBox" Margin="2"
+								 Text="{Binding Path=Plaintext, Mode=TwoWay}"
+						         MaxLines="3" MinLines="3" TextWrapping="Wrap"
+						         Height="50" VerticalScrollBarVisibility="Auto" />
+					</StackPanel>
+
+					<Button x:Name="actionButton" Grid.Column="1" Grid.Row="1"
+					        HorizontalAlignment="Center" VerticalAlignment="Center"
+							Padding="10,4" Click="ActionButton_Click">
+						Виконати
+					</Button>
+
+					<StackPanel Grid.Column="2" Grid.Row="1" Margin="5">
+						<TextBlock Margin="2">Зашифрований текст</TextBlock>
+						<TextBox x:Name="ciphertextTextBox" Margin="2"
+								 Text="{Binding Path=Ciphertext, Mode=TwoWay}"
+						         MaxLines="3" MinLines="3" TextWrapping="Wrap"
+						         Height="50" VerticalScrollBarVisibility="Auto" />
+					</StackPanel>
+				</Grid>
+			</Grid>
+		</TabItem>
+		<TabItem Header="Алгоритм Діффі-Гелмана">
+
+		</TabItem>
+	</TabControl>
+</Window>
