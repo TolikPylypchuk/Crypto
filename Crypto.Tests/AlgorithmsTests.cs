@@ -6,9 +6,25 @@ namespace Crypto.Tests
 	public class AlgorithmsTests
 	{
 		[TestMethod]
-		public void GCDTest()
+		public void GCDValueTest()
 		{
-			Assert.AreEqual(6, Algorithms.GCD(12, 18));
+			Assert.AreEqual(6, Algorithms.GCD(12, 18).Value);
+		}
+
+		[TestMethod]
+		public void GCDXYTest1()
+		{
+			var result = Algorithms.GCD(18, 12);
+			Assert.AreEqual(1, result.X);
+			Assert.AreEqual(-1, result.Y);
+		}
+
+		[TestMethod]
+		public void GCDXYTest2()
+		{
+			var result = Algorithms.GCD(12, 18);
+			Assert.AreEqual(-1, result.X);
+			Assert.AreEqual(1, result.Y);
 		}
 
 		[TestMethod]

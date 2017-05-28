@@ -1,4 +1,6 @@
-﻿namespace Crypto
+﻿using System;
+
+namespace Crypto
 {
 	public static class Algorithms
 	{
@@ -8,20 +10,26 @@
 		/// <param name="a">The first number.</param>
 		/// <param name="b">The second number.</param>
 		/// <returns>The greatest common denomintor of a and b.</returns>
-		public static int GCD(int a, int b)
+		public static (int Value, int X, int Y) GCD(
+			int a, int b)
 		{
-			while (a != 0 && b != 0)
+			(int Value, int X, int Y) GCDInternal(
+				int r1, int r2, int x1, int x2, int y1, int y2)
 			{
-				if (a > b)
-				{
-					a %= b;
-				} else
-				{
-					b %= a;
-				}
+				int r3 = r1 - r2 * (r1 / r2);
+				int x3 = x1 - x2 * (r1 / r2);
+				int y3 = y1 - y2 * (r1 / r2);
+
+				return r3 != 0
+					? GCDInternal(r2, r3, x2, x3, y2, y3)
+					: (r2, x2, y2);
 			}
 
-			return a == 0 ? b : a;
+			var result = GCDInternal(Math.Max(a, b), Math.Min(a, b), 1, 0, 0, 1);
+
+			return a > b
+				? result
+				: (result.Value, result.Y, result.X);
 		}
 
 		/// <summary>

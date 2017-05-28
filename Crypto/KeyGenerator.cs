@@ -90,18 +90,17 @@ namespace Crypto
 			var r = new Random();
 
 			int e = 0;
+			int d = 0;
+			(int Value, int X, int Y) gcd;
 
 			do
 			{
 				e = r.Next(1, fn);
-			} while (Algorithms.GCD(e, fn) != 1);
-
-			int d = d = (fn + 1) / e;
-
-			for (int i = 2; d * e % fn != 1; i++)
-			{
-				d = (fn * i + 1) / e;
-			}
+				gcd = Algorithms.GCD(fn, e);
+				d = gcd.Y > 0
+					? gcd.Y
+					: gcd.Y + fn;
+			} while (gcd.Value != 1);
 
 			return (new RSAKey((n, e)), new RSAKey((n, d)));
 		}
