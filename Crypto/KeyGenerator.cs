@@ -1,6 +1,7 @@
 ﻿using System;
 
 using SimpleSubstitutionKey = Crypto.Key<(string From, string To)>;
+using RSAKey = Crypto.Key<(int N, int Value)>;
 
 namespace Crypto
 {
@@ -57,6 +58,52 @@ namespace Crypto
 
 			return new SimpleSubstitutionKey(
 				(encryptionKey.Value.To, encryptionKey.Value.From));
+		}
+
+		/// <summary>
+		/// Generates a pair of RSA keys.
+		/// </summary>
+		/// <param name="p">The first prime number.</param>
+		/// <param name="q">The second prime number.</param>
+		/// <returns>
+		/// The encryption and decryption RSA keys.
+		/// </returns>
+		public static (RSAKey EncKey, RSAKey DecKey) GenerateRSAKeys(int p, int q)
+		{
+			if (p <= 0)
+			{
+				throw new ArgumentOutOfRangeException(
+					nameof(p),
+					"p must be greater than 0.");
+			}
+
+			if (q <= 0)
+			{
+				throw new ArgumentOutOfRangeException(
+					nameof(q),
+					"q must be greater than 0.");
+			}
+
+			int n = p * q;
+			int fn = (p - 1) * (q - 1);
+
+			var r = new Random();
+
+			int e = 0;
+
+			do
+			{
+				e = r.Next(1, fn);
+			} while (Algorithms.GCD(e, fn) != 1);
+
+			int d = d = (fn + 1) / e;
+
+			for (int i = 2; d * e % fn != 1; i++)
+			{
+				d = (fn * i + 1) / e;
+			}
+
+			return (new RSAKey((n, e)), new RSAKey((n, d)));
 		}
 	}
 }

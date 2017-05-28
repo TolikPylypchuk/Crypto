@@ -44,5 +44,35 @@ namespace Crypto.Tests
 		{
 			KeyGenerator.GetSimpleSubstitutionDecryptionKey(null);
 		}
+
+		[TestMethod]
+		public void GenerateRSAKeysTest()
+		{
+			const int p = 17;
+			const int q = 11;
+			const int fn = (p - 1) * (q - 1);
+
+			var keys = KeyGenerator.GenerateRSAKeys(p, q);
+
+			Assert.AreEqual(p * q, keys.EncKey.Value.N);
+			Assert.AreEqual(p * q, keys.DecKey.Value.N);
+
+			Assert.IsTrue(
+				keys.EncKey.Value.Value * keys.DecKey.Value.Value % fn == 1);
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentOutOfRangeException))]
+		public void GenerateRSAKeysPInvalidTest()
+		{
+			KeyGenerator.GenerateRSAKeys(-1, 2);
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentOutOfRangeException))]
+		public void GenerateRSAKeysQInvalidTest()
+		{
+			KeyGenerator.GenerateRSAKeys(2, -2);
+		}
 	}
 }

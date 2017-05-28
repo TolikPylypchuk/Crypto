@@ -41,13 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms.cs" />
     <Compile Include="Alphabet.cs" />
     <Compile Include="Alphabets.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="ICryptosystem.cs" />
     <Compile Include="Key.cs" />
     <Compile Include="KeyGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Systems\CaesarCipher.cs" />
+    <Compile Include="Systems\RSA.cs" />
     <Compile Include="Systems\SimpleSubstitutionCipher.cs" />
     <Compile Include="Systems\VisenereCipher.cs" />
   </ItemGroup>

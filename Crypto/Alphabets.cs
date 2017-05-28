@@ -19,6 +19,8 @@ namespace Crypto
 			Ukrainian = UkrainianUpper + UkrainianLower;
 
 			Punctuation = new Alphabet(" .,;:!?/\\'\"-()`");
+			DecimalDigits = new Alphabet("0123456789");
+			BinaryDigits = new Alphabet("01");
 			SpecialCharacters = new Alphabet("[]{}<>~@#$%^&*-_+=");
 
 			EnglishWithPunctuation = English + Punctuation;
@@ -59,6 +61,16 @@ namespace Crypto
 		/// Gets the alpabet that contains space and the punctuation characters.
 		/// </summary>
 		public static Alphabet Punctuation { get; }
+
+		/// <summary>
+		/// Gets the alpabet that contains digits 0-9.
+		/// </summary>
+		public static Alphabet DecimalDigits { get; }
+
+		/// <summary>
+		/// Gets the alpabet that contains digits 0 and 1.
+		/// </summary>
+		public static Alphabet BinaryDigits { get; }
 
 		/// <summary>
 		/// Gets the alpabet that contains the special characters.

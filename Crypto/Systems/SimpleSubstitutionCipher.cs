@@ -45,8 +45,8 @@ namespace Crypto.Systems
 		/// <param name="key">The encryption key.</param>
 		/// <returns>The ecrypted message.</returns>
 		/// <exception cref="ArgumentException">
-		/// The message does not belong to this cipher's alphabet
-		/// or the key cannot be used for encryption.
+		/// This cipher is strict and the message does not belong
+		/// to this cipher's alphabet or the key cannot be used for encryption.
 		/// </exception>
 		/// <exception cref="ArgumentNullException">
 		/// The message or the key is <c>null</c>.
@@ -65,8 +65,8 @@ namespace Crypto.Systems
 		/// <param name="key">The decryption key.</param>
 		/// <returns>The derypted message.</returns>
 		/// <exception cref="ArgumentException">
-		/// The message does not belong to this cipher's alphabet
-		/// or the key cannot be used for encryption.
+		/// This cipher is strict and the message does not belong
+		/// to this cipher's alphabet or the key cannot be used for decryption.
 		/// </exception>
 		/// <exception cref="ArgumentNullException">
 		/// The message or the key is <c>null</c>.
@@ -121,6 +121,14 @@ namespace Crypto.Systems
 		/// </summary>
 		/// <param name="message">The message to check.</param>
 		/// <param name="key">The key to check.</param>
+		/// <exception cref="ArgumentException">
+		/// The cipher is strict and the message
+		/// does not belong to the cipher's alphabet
+		/// or the key is not correct.
+		/// </exception>
+		/// <exception cref="ArgumentNullException">
+		/// The message or key is <c>null</c>.
+		/// </exception>
 		private void CheckParameters(string message, SimpleSubstitutionKey key)
 		{
 			if (message == null)

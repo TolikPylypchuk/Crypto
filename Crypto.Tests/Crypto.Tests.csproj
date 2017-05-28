@@ -55,7 +55,9 @@
     <Compile Include="KeyTests.cs" />
     <Compile Include="Systems\SimpleSubstitutionCipherTests.cs" />
     <Compile Include="KeyGeneratorTests.cs" />
+    <Compile Include="Systems\RSATests.cs" />
     <Compile Include="Systems\VisenereCipherTests.cs" />
+    <Compile Include="AlgorithmsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
