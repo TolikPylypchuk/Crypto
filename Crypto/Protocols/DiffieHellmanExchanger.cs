@@ -29,7 +29,7 @@ namespace Crypto.Protocols
 		/// <summary>
 		/// Gets or sets the participant's part of the exchanger.
 		/// </summary>
-		private int Part { get; set; }
+		public int Part { get; private set; }
 
 		/// <summary>
 		/// Sets the inital numbers of the exchanger.
@@ -69,6 +69,12 @@ namespace Crypto.Protocols
 			return result;
 		}
 
+		/// <summary>
+		/// Generates the key from this exchanger's part and the other part.
+		/// </summary>
+		/// <returns>
+		/// The generated key.
+		/// </returns>
 		public async Task<Key<int>> GenerateKey()
 		{
 			var otherPart = await this.ExternalKeySource();
@@ -77,12 +83,19 @@ namespace Crypto.Protocols
 				Algorithms.Modulo(otherPart.Value, this.Part, this.P));
 		}
 
+		/// <summary>
+		/// Raises the KeyPartGenerated event.
+		/// </summary>
+		/// <param name="value">The value of the key part.</param>
 		protected virtual void OnKeyPartGenerated(int value)
 		{
 			this.KeyPartGenerated?.Invoke(
 				this, new KeyPartGeneratedEventArgs(new Key<int>(value)));
 		}
 
+		/// <summary>
+		/// Raised when this exchanger's key part is generated.
+		/// </summary>
 		public event EventHandler<KeyPartGeneratedEventArgs> KeyPartGenerated;
 	}
 }

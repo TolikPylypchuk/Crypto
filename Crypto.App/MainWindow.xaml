@@ -181,8 +181,8 @@
 								</TextBlock>
 								<TextBox x:Name="aTextBox" Width="50" VerticalAlignment="Center"
 								         Text="{Binding Path=DHA, Mode=TwoWay}" />
-								<Button Margin="5" Padding="10,4" Click="GenerateA_Click">
-									Згенерувати
+								<Button Margin="5" Padding="10,2" Click="GenerateA_Click">
+									Згенерувати a
 								</Button>
 							</StackPanel>
 							<TextBlock x:Name="aReceivedKey" Margin="5" />
@@ -209,8 +209,8 @@
 								</TextBlock>
 								<TextBox x:Name="bTextBox" Width="50" VerticalAlignment="Center"
 								         Text="{Binding Path=DHB, Mode=TwoWay}" />
-								<Button Margin="5" Padding="10,4" Click="GenerateB_Click">
-									Згенерувати
+								<Button Margin="5" Padding="10,2" Click="GenerateB_Click">
+									Згенерувати b
 								</Button>
 							</StackPanel>
 							<TextBlock x:Name="bReceivedKey" Margin="5" />

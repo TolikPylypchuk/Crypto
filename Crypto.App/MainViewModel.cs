@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
+
 using Crypto.Protocols;
 
 namespace Crypto.App
@@ -29,11 +30,13 @@ namespace Crypto.App
 		public bool ExchangeInProgress { get; set; }
 		public DiffieHellmanExchanger ExchengerA { get; set; }
 		public DiffieHellmanExchanger ExchengerB { get; set; }
-
+		
 		public string DHP { get; set; }
 		public string DHQ { get; set; }
 		public string DHA { get; set; }
+		public string DHAToSend { get; set; }
 		public string DHB { get; set; }
+		public string DHBToSend { get; set; }
 
 		public List<Alphabet> AlphabetsList { get; set; } = new List<Alphabet>
 		{

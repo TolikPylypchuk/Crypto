@@ -164,10 +164,12 @@ namespace Crypto.App
 			this.model.ExchengerA = new DiffieHellmanExchanger();
 			this.model.ExchengerB = new DiffieHellmanExchanger();
 
-			this.model.DHA = this.model.DHB =
+			this.model.DHAToSend = this.model.DHBToSend =
+				this.model.DHA = this.model.DHB =
 				this.aTextBox.Text = this.bTextBox.Text = null;
 
 			this.aKey.Text = this.bKey.Text = String.Empty;
+			this.aGenerate.IsEnabled = this.bGenerate.IsEnabled = false;
 
 			int p = Int32.Parse(this.model.DHP);
 			int q = Int32.Parse(this.model.DHQ);
@@ -190,9 +192,9 @@ namespace Crypto.App
 				() => Task.Run(
 					() =>
 					{
-						if (!String.IsNullOrEmpty(this.model.DHB))
+						if (!String.IsNullOrEmpty(this.model.DHBToSend))
 						{
-							return new Key<int>(Int32.Parse(this.model.DHB));
+							return new Key<int>(Int32.Parse(this.model.DHBToSend));
 						}
 
 						Key<int> result = null;
@@ -209,9 +211,9 @@ namespace Crypto.App
 				() => Task.Run(
 					() =>
 					{
-						if (!String.IsNullOrEmpty(this.model.DHA))
+						if (!String.IsNullOrEmpty(this.model.DHAToSend))
 						{
-							return new Key<int>(Int32.Parse(this.model.DHA));
+							return new Key<int>(Int32.Parse(this.model.DHAToSend));
 						}
 
 						Key<int> result = null;
@@ -230,12 +232,14 @@ namespace Crypto.App
 			this.exchangerA.Text = "Абонент A: Генерація ключа...";
 			await Task.Delay(2000);
 
-			int part = this.model.ExchengerA.GeneratePart();
-			this.exchangerA.Text = "Абонент A";
-			this.model.DHA = this.aTextBox.Text = part.ToString();
+			int partToSend = this.model.ExchengerA.GeneratePart();
 
-			this.bReceivedKey.Text = $"Отримав {part}";
-			this.bGenerate.IsEnabled = true;
+			this.exchangerA.Text = "Абонент A";
+			this.model.DHAToSend = partToSend.ToString();
+			this.aTextBox.Text = this.model.ExchengerA.Part.ToString();
+
+			this.bReceivedKey.Text = $"Отримав {partToSend}";
+			this.aGenerate.IsEnabled = true;
 		}
 
 		private async void GenerateB_Click(object sender, RoutedEventArgs e)
@@ -243,12 +247,14 @@ namespace Crypto.App
 			this.exchangerB.Text = "Абонент B: Генерація ключа...";
 			await Task.Delay(2000);
 
-			int part = this.model.ExchengerB.GeneratePart();
-			this.exchangerB.Text = "Абонент B";
-			this.model.DHB = this.bTextBox.Text = part.ToString();
+			int partToSend = this.model.ExchengerB.GeneratePart();
 
-			this.aReceivedKey.Text = $"Отримав {part}";
-			this.aGenerate.IsEnabled = true;
+			this.exchangerB.Text = "Абонент B";
+			this.model.DHBToSend = partToSend.ToString();
+			this.bTextBox.Text = this.model.ExchengerB.Part.ToString();
+
+			this.aReceivedKey.Text = $"Отримав {partToSend}";
+			this.bGenerate.IsEnabled = true;
 		}
 
 		private async void GenerateAFull_Click(object sender, RoutedEventArgs e)
