@@ -11,20 +11,11 @@ namespace Crypto.Protocols
 	/// </summary>
 	public class DiffieHellmanExchanger
 	{
-		private Func<Task<Key<int>>> externalKeySource;
-		
 		/// <summary>
-		/// Initializes a new instance of the DiffieHellmanProtocol class.
+		/// Gets or sets the external key source.
 		/// </summary>
-		/// <param name="externalKeySource">
-		/// The source of the external key.
-		/// </param>
-		public DiffieHellmanExchanger(
-			Func<Task<Key<int>>> externalKeySource)
-		{
-			this.externalKeySource = externalKeySource;
-		}
-
+		public Func<Task<Key<int>>> ExternalKeySource { get; set; }
+		
 		/// <summary>
 		/// Gets or sets the first initial number of the exchanger.
 		/// </summary>
@@ -80,7 +71,7 @@ namespace Crypto.Protocols
 
 		public async Task<Key<int>> GenerateKey()
 		{
-			var otherPart = await this.externalKeySource();
+			var otherPart = await this.ExternalKeySource();
 
 			return new Key<int>(
 				Algorithms.Modulo(otherPart.Value, this.Part, this.P));

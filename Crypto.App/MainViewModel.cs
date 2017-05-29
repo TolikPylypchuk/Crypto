@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
+using Crypto.Protocols;
 
 namespace Crypto.App
 {
@@ -13,6 +14,26 @@ namespace Crypto.App
 		public string Ciphertext { get; set; }
 
 		public string Shift { get; set; }
+
+		public string SSCFrom { get; set; }
+		public string SSCTo { get; set; }
+
+		public string VisenereKey { get; set; }
+
+		public string RSAP { get; set; }
+		public string RSAQ { get; set; }
+		public string RSAN { get; set; }
+		public string RSAE { get; set; }
+		public string RSAD { get; set; }
+
+		public bool ExchangeInProgress { get; set; }
+		public DiffieHellmanExchanger ExchengerA { get; set; }
+		public DiffieHellmanExchanger ExchengerB { get; set; }
+
+		public string DHP { get; set; }
+		public string DHQ { get; set; }
+		public string DHA { get; set; }
+		public string DHB { get; set; }
 
 		public List<Alphabet> AlphabetsList { get; set; } = new List<Alphabet>
 		{
