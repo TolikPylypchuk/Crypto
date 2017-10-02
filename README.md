@@ -7,13 +7,18 @@ A simple library for encryption and decryption.
 Includes the support of the following cryptosystems:
 - Caesar cipher;
 - Simple substitution cipher;
-- Visenere cipher.
+- Visenere cipher;
+- RSA;
+- Simple DES.
+
+Also supports the Diffie-Hellman key exchanger.
 
 ## Customisation
 
 The library is highly customisable.
 
 It can work with any alphabet. The following alphabets are included out-of-the-box:
+- ASCII (8-bit);
 - English (uppercase);
 - English (lowercase);
 - English (both upper and lowercase);
