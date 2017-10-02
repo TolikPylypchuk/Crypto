@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -36,8 +39,11 @@ namespace Crypto.App
 					case "Шифр Віженера":
 						this.ExecuteVisenereCipher();
 						break;
-					case "Шифр RSA":
+					case "RSA":
 						this.ExecuteRSA();
+						break;
+					case "S-DES":
+						this.ExecuteSDES();
 						break;
 				}
 			} catch
@@ -48,7 +54,7 @@ namespace Crypto.App
 					MessageBoxButton.OK,
 					MessageBoxImage.Error);
 			}
-}
+		}
 
 		private void ExecuteCaesarCipher()
 		{
@@ -141,16 +147,47 @@ namespace Crypto.App
 				this.Decrypt(system, new RSAKey((n, d)));
 			}
 		}
-		
+
+		private void ExecuteSDES()
+		{
+			if (this.model.SDESKey.Length != 10 ||
+				!Regex.IsMatch(this.model.SDESKey, "^[01]+$"))
+			{
+				MessageBox.Show(
+					"Неправильний ключ",
+					"Помилка",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error);
+			}
+
+			var system = new SDES(this.model.Alphabet)
+			{
+				IsStrict = this.model.IsStrict
+			};
+
+			var key = new BitArray(
+				this.model.SDESKey.Select(ch => ch == '1').ToArray());
+
+			if (this.model.Action == "Зашифрувати")
+			{
+				this.Encrypt(system, new Key<BitArray>(key));
+			} else
+			{
+				this.Decrypt(system, new Key<BitArray>(key));
+			}
+		}
+
 		private void Encrypt<T>(ICryptosystem<T> system, Key<T> key)
-			where T : IEquatable<T>
 		{
 			this.model.Ciphertext = system.Encrypt(this.model.Plaintext, key);
-			this.ciphertextTextBox.Text = this.model.Ciphertext;
+			this.ciphertextTextBox.Text =
+				this.model.Ciphertext
+//					.Select(ch => Char.IsControl(ch) ? '\u25A1' : ch)
+//					.Aggregate(String.Empty, (acc, ch) => acc + ch)
+					;
 		}
 
 		private void Decrypt<T>(ICryptosystem<T> system, Key<T> key)
-			where T : IEquatable<T>
 		{
 			this.model.Plaintext = system.Decrypt(this.model.Ciphertext, key);
 			this.plaintextTextBox.Text = this.model.Plaintext;
@@ -166,7 +203,7 @@ namespace Crypto.App
 
 			this.model.DHAToSend = this.model.DHBToSend =
 				this.model.DHA = this.model.DHB =
-				this.aTextBox.Text = this.bTextBox.Text = null;
+				this.aTextBox.Text = this.bTextBox.Text = String.Empty;
 
 			this.aKey.Text = this.bKey.Text = String.Empty;
 			this.aGenerate.IsEnabled = this.bGenerate.IsEnabled = false;

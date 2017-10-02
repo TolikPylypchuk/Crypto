@@ -15,7 +15,7 @@ namespace Crypto.Systems
 	public class RSA : ICryptosystem<(int N, int Value)>
 	{
 		/// <summary>
-		/// Initializes a new instance of the RSA class.
+		/// Initializes a new instance of the <see cref="RSA" /> class.
 		/// </summary>
 		/// <param name="alphabet">The alphabet of this cipher.</param>
 		/// <exception cref="ArgumentNullException">
@@ -56,7 +56,7 @@ namespace Crypto.Systems
 		/// </exception>
 		public string Encrypt(string plaintext, RSAKey key)
 		{
-			this.CheckParameters(plaintext, key, true);
+			this.ValidateParameters(plaintext, key, true);
 
 			int padding = (this.Alphabet.Length - 1).NumberOfDigits();
 
@@ -87,7 +87,7 @@ namespace Crypto.Systems
 		/// </exception>
 		public string Decrypt(string ciphertext, RSAKey key)
 		{
-			this.CheckParameters(ciphertext, key);
+			this.ValidateParameters(ciphertext, key);
 
 			return new String(ciphertext.SplitByLength(key.Value.N.NumberOfDigits())
 				.Select(Int32.Parse)
@@ -108,8 +108,8 @@ namespace Crypto.Systems
 		/// <summary>
 		/// Checks whether the parameters meet the system's requirements.
 		/// </summary>
-		/// <param name="message">The message to check.</param>
-		/// <param name="key">The key to check.</param>
+		/// <param name="message">The message to validate.</param>
+		/// <param name="key">The key to validate.</param>
 		/// <param name="encrypting">
 		/// <c>true</c>, if encrypting.
 		/// Otherwise, <c>false</c>.</param>
@@ -120,7 +120,7 @@ namespace Crypto.Systems
 		/// <exception cref="ArgumentNullException">
 		/// The message or key is <c>null</c>.
 		/// </exception>
-		private void CheckParameters(
+		private void ValidateParameters(
 			string message,
 			Key<(int, int)> key,
 			bool encrypting = false)

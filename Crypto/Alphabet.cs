@@ -111,7 +111,7 @@ namespace Crypto
 		/// </returns>
 		public bool Belongs(string text)
 		{
-			var distinct = text.Distinct().OrderBy(c => c);
+			var distinct = text.Distinct().OrderBy(c => c).ToList();
 
 			return distinct.Intersect(this.indices.Keys)
 						   .OrderBy(c => c)

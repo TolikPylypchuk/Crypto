@@ -91,8 +91,8 @@ namespace Crypto.Keys
 
 			var r = new Random();
 
-			int e = 0;
-			int d = 0;
+			int e;
+			int d;
 			(int Value, int X, int Y) gcd;
 
 			do

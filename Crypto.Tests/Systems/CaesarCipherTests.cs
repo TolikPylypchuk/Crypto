@@ -5,9 +5,8 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Crypto.Keys;
-using Crypto.Systems;
 
-namespace Crypto.Tests.Systems
+namespace Crypto.Systems
 {
 	[TestClass]
 	[SuppressMessage("ReSharper", "UnusedVariable")]

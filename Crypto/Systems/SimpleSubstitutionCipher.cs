@@ -12,7 +12,8 @@ namespace Crypto.Systems
 		: ICryptosystem<(string From, string To)>
 	{
 		/// <summary>
-		/// Initializes a new instance of the SimpleSubstitutionCipher class.
+		/// Initializes a new instance of the
+		/// <see cref="SimpleSubstitutionCipher" /> class.
 		/// </summary>
 		/// <param name="alphabet">The alphabet of this cipher.</param>
 		/// <exception cref="ArgumentNullException">
@@ -53,7 +54,7 @@ namespace Crypto.Systems
 		/// </exception>
 		public string Encrypt(string plaintext, SimpleSubstitutionKey key)
 		{
-			this.CheckParameters(plaintext, key);
+			this.ValidateParameters(plaintext, key);
 
 			return Transform(plaintext, key.Value.From, key.Value.To);
 		}
@@ -110,7 +111,7 @@ namespace Crypto.Systems
 				return false;
 			}
 
-			var alphabet = this.Alphabet.OrderBy(c => c);
+			var alphabet = this.Alphabet.OrderBy(c => c).ToList();
 
 			return key.Value.From.OrderBy(c => c).SequenceEqual(alphabet) &&
 			       key.Value.To.OrderBy(c => c).SequenceEqual(alphabet);
@@ -119,8 +120,8 @@ namespace Crypto.Systems
 		/// <summary>
 		/// Checks whether the parameters meet the cipher's requirements.
 		/// </summary>
-		/// <param name="message">The message to check.</param>
-		/// <param name="key">The key to check.</param>
+		/// <param name="message">The message to validate.</param>
+		/// <param name="key">The key to validate.</param>
 		/// <exception cref="ArgumentException">
 		/// The cipher is strict and the message
 		/// does not belong to the cipher's alphabet
@@ -129,7 +130,7 @@ namespace Crypto.Systems
 		/// <exception cref="ArgumentNullException">
 		/// The message or key is <c>null</c>.
 		/// </exception>
-		private void CheckParameters(string message, SimpleSubstitutionKey key)
+		private void ValidateParameters(string message, SimpleSubstitutionKey key)
 		{
 			if (message == null)
 			{

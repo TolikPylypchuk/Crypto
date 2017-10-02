@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Crypto.Infrastructure;
-using Crypto.Protocols;
 
-namespace Crypto.Tests.Protocols
+namespace Crypto.Protocols
 {
 	[TestClass]
 	[SuppressMessage("ReSharper", "UnusedVariable")]

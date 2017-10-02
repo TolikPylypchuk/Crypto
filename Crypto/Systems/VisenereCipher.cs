@@ -9,7 +9,8 @@ namespace Crypto.Systems
 	public class VisenereCipher : ICryptosystem<string>
 	{
 		/// <summary>
-		/// Initializes a new instance of the VisenereCipher class.
+		/// Initializes a new instance of the
+		/// <see cref="VisenereCipher" /> class.
 		/// </summary>
 		/// <param name="alphabet">The alphabet of this cipher.</param>
 		/// <exception cref="ArgumentNullException">
@@ -50,7 +51,7 @@ namespace Crypto.Systems
 		/// </exception>
 		public string Encrypt(string plaintext, Key<string> key)
 		{
-			this.CheckParameters(plaintext, key);
+			this.ValidateParameters(plaintext, key);
 
 			return this.Transform(plaintext, key, true);
 		}
@@ -70,7 +71,7 @@ namespace Crypto.Systems
 		/// </exception>
 		public string Decrypt(string ciphertext, Key<string> key)
 		{
-			this.CheckParameters(ciphertext, key);
+			this.ValidateParameters(ciphertext, key);
 
 			return this.Transform(ciphertext, key, false);
 		}
@@ -102,12 +103,12 @@ namespace Crypto.Systems
 						index >= 0 ? index : index + this.Alphabet.Length];
 				})
 				.ToArray());
-		
+
 		/// <summary>
 		/// Checks whether the parameters meet the cipher's requirements.
 		/// </summary>
-		/// <param name="message">The message to check.</param>
-		/// <param name="key">The key to check.</param>
+		/// <param name="message">The message to validate.</param>
+		/// <param name="key">The key to validate.</param>
 		/// <exception cref="ArgumentException">
 		/// The cipher is strict and the message
 		/// does not belong to the cipher's alphabet
@@ -117,7 +118,7 @@ namespace Crypto.Systems
 		/// <exception cref="ArgumentNullException">
 		/// The message or key is <c>null</c>.
 		/// </exception>
-		private void CheckParameters(string message, Key<string> key)
+		private void ValidateParameters(string message, Key<string> key)
 		{
 			if (message == null)
 			{

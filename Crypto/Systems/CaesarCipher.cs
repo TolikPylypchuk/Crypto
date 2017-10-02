@@ -9,7 +9,7 @@ namespace Crypto.Systems
 	public class CaesarCipher: ICryptosystem<int>
 	{
 		/// <summary>
-		/// Initializes a new instance of the CaesarCipher class.
+		/// Initializes a new instance of the <see cref="CaesarCipher" /> class.
 		/// </summary>
 		/// <param name="alphabet">The alphabet of this cipher.</param>
 		/// <exception cref="ArgumentNullException">
@@ -50,7 +50,7 @@ namespace Crypto.Systems
 		/// </exception>
 		public string Encrypt(string plaintext, Key<int> key)
 		{
-			this.CheckParameters(plaintext, key);
+			this.ValidateParameters(plaintext, key);
 
 			return this.Shift(plaintext, key.Value);
 		}
@@ -93,8 +93,8 @@ namespace Crypto.Systems
 		/// <summary>
 		/// Checks whether the parameters meet the cipher's requirements.
 		/// </summary>
-		/// <param name="message">The message to check.</param>
-		/// <param name="key">The key to check.</param>
+		/// <param name="message">The message to validate</param>
+		/// <param name="key">The key to validate.</param>
 		/// <exception cref="ArgumentException">
 		/// The cipher is strict and the message
 		/// does not belong to the cipher's alphabet.
@@ -102,7 +102,7 @@ namespace Crypto.Systems
 		/// <exception cref="ArgumentNullException">
 		/// The message or key is <c>null</c>.
 		/// </exception>
-		private void CheckParameters(string message, Key<int> key)
+		private void ValidateParameters(string message, Key<int> key)
 		{
 			if (message == null)
 			{

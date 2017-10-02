@@ -55,7 +55,7 @@
 							         Text="{Binding Path=VisenereKey, Mode=TwoWay}" />
 						</StackPanel>
 					</TabItem>
-					<TabItem Header="Шифр RSA">
+					<TabItem Header="RSA">
 						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 							<TextBlock VerticalAlignment="Center" Margin="5">
 								p:
@@ -85,6 +85,15 @@
 							<TextBox x:Name="dTextBox" Width="50"
 									 VerticalAlignment="Center"
 							         Text="{Binding Path=RSAD, Mode=TwoWay}" />
+						</StackPanel>
+					</TabItem>
+					<TabItem Header="S-DES">
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<TextBlock VerticalAlignment="Center" Margin="5">
+								Ключ:
+							</TextBlock>
+							<TextBox Width="100" VerticalAlignment="Center" MaxLength="10"
+									 Text="{Binding Path=SDESKey, Mode=TwoWay}" />
 						</StackPanel>
 					</TabItem>
 				</TabControl>

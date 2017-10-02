@@ -3,9 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using Crypto.Systems;
-
-namespace Crypto.Tests.Systems
+namespace Crypto.Systems
 {
 	[TestClass]
 	[SuppressMessage("ReSharper", "UnusedVariable")]

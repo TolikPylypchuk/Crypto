@@ -4,11 +4,10 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Crypto.Keys;
-using Crypto.Systems;
 
 using SimpleSubstitutionKey = Crypto.Key<(string From, string To)>;
 
-namespace Crypto.Tests.Systems
+namespace Crypto.Systems
 {
 	[TestClass]
 	[SuppressMessage("ReSharper", "UnusedVariable")]

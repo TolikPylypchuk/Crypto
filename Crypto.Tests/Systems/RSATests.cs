@@ -3,11 +3,9 @@ using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using Crypto.Systems;
-
 using RSAKey = Crypto.Key<(int N, int Value)>;
 
-namespace Crypto.Tests.Systems
+namespace Crypto.Systems
 {
 	[TestClass]
 	[SuppressMessage("ReSharper", "UnusedVariable")]

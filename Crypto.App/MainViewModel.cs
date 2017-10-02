@@ -38,8 +38,11 @@ namespace Crypto.App
 		public string DHB { get; set; }
 		public string DHBToSend { get; set; }
 
+		public string SDESKey { get; set; }
+
 		public List<Alphabet> AlphabetsList { get; set; } = new List<Alphabet>
 		{
+			Alphabets.ASCII,
 			Alphabets.English,
 			Alphabets.EnglishLower,
 			Alphabets.EnglishUpper,

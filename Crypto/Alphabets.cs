@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Crypto
 {
@@ -10,6 +12,14 @@ namespace Crypto
 	{
 		static Alphabets()
 		{
+			ASCII = new Alphabet(
+				Enumerable.Range(0, 256)
+					      .Select(i => (char)i)
+					      .Aggregate(String.Empty, (acc, ch) => acc + ch))
+			{
+				Name = "ASCII"
+			};
+
 			EnglishUpper = new Alphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 			{
 				Name = "Англійський (великі букви)"
@@ -59,6 +69,11 @@ namespace Crypto
 			EnglishWithPunctuation = English + Punctuation;
 			UkrainianWithPunctuation = Ukrainian + Punctuation;
 		}
+
+		/// <summary>
+		/// Gets the alphabet of ASCII characters.
+		/// </summary>
+		public static Alphabet ASCII { get; }
 
 		/// <summary>
 		/// Gets the lowercase letters of the English alphabet.

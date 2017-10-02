@@ -7,7 +7,6 @@ namespace Crypto
 	/// </summary>
 	/// <typeparam name="T">The type of the key.</typeparam>
 	public class Key<T> : IEquatable<Key<T>>
-		where T : IEquatable<T>
 	{
 		/// <summary>
 		/// Initializes a new instance of the Key class.
