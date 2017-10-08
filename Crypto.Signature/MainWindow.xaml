@@ -4,12 +4,116 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Crypto.Signature"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="500">
-	<Window.DataContext>
-		<local:MainViewModel x:Name="model" />
-	</Window.DataContext>
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+		ResizeMode="CanMinimize" Title="Crypto Signature"
+		Height="200" Width="500"
+        d:DataContext="{d:DesignInstance Type=local:MainViewModel, IsDesignTimeCreatable=True}">
+	<Window.CommandBindings>
+		<CommandBinding Command="Open"
+		                Executed="Open_Executed" />
+		<CommandBinding Command="local:CustomCommands.Exit"
+		                Executed="Exit_Executed" />
+		<CommandBinding Command="local:CustomCommands.Encrypt"
+		                Executed="Encrypt_Executed"
+		                CanExecute="RSACommand_CanExecute" />
+		<CommandBinding Command="local:CustomCommands.Decrypt"
+						Executed="Decrypt_Executed"
+						CanExecute="RSACommand_CanExecute" />
+		<CommandBinding Command="local:CustomCommands.Sign"
+						Executed="Sign_Executed"
+						CanExecute="RSACommand_CanExecute" />
+	</Window.CommandBindings>
 
-	<Grid>
-	</Grid>
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="File">
+				<MenuItem Command="Open" />
+				<Separator />
+				<MenuItem Command="local:CustomCommands.Exit" />
+			</MenuItem>
+			<MenuItem Header="RSA">
+				<MenuItem Command="local:CustomCommands.Encrypt" />
+				<MenuItem Command="local:CustomCommands.Decrypt" />
+				<MenuItem Command="local:CustomCommands.Sign" />
+			</MenuItem>
+		</Menu>
+
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<StackPanel Grid.Row="0" Orientation="Horizontal"
+						HorizontalAlignment="Center">
+				<TextBlock VerticalAlignment="Center" Margin="5">
+					Plaintext File:
+				</TextBlock>
+				<TextBox Width="250" VerticalAlignment="Center" Margin="10"
+						 Text="{Binding Path=PlaintextPath, Mode=TwoWay}" />
+				<Button Command="Open" VerticalAlignment="Center"
+				        Padding="5,2">
+					Browse...
+				</Button>
+			</StackPanel>
+
+			<StackPanel Grid.Row="1" Orientation="Horizontal"
+			            HorizontalAlignment="Center">
+
+				<ComboBox HorizontalAlignment="Center"
+						  VerticalAlignment="Center"
+						  ItemsSource="{Binding Path=AlphabetsList}"
+						  DisplayMemberPath="Name"
+						  SelectedIndex="0"
+						  SelectedItem="{Binding Path=Alphabet, Mode=TwoWay}" />
+
+				<TextBlock VerticalAlignment="Center" Margin="15,5,5,5">
+					n:
+				</TextBlock>
+				<TextBox x:Name="nTextBox" Width="50"
+						 VerticalAlignment="Center"
+						 Text="{Binding Path=N, Mode=TwoWay}" />
+				<TextBlock VerticalAlignment="Center" Margin="15,5,5,5">
+					e:
+				</TextBlock>
+				<TextBox x:Name="eTextBox" Width="50"
+						 VerticalAlignment="Center"
+						 Text="{Binding Path=E, Mode=TwoWay}" />
+				<TextBlock VerticalAlignment="Center" Margin="15,5,5,5">
+					d:
+				</TextBlock>
+				<TextBox x:Name="dTextBox" Width="50"
+						 VerticalAlignment="Center"
+						 Text="{Binding Path=D, Mode=TwoWay}" />
+			</StackPanel>
+
+			<Grid Grid.Row="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+
+				<Button Grid.Column="0" HorizontalAlignment="Center"
+				        VerticalAlignment="Center" Padding="10,4"
+						Command="local:CustomCommands.Encrypt"
+						Width="75">
+					Encrypt
+				</Button>
+				<Button Grid.Column="1" HorizontalAlignment="Center"
+						VerticalAlignment="Center" Padding="10,4"
+						Command="local:CustomCommands.Decrypt"
+						Width="75">
+					Decrypt
+				</Button>
+				<Button Grid.Column="2" HorizontalAlignment="Center"
+						VerticalAlignment="Center" Padding="10,4"
+						Command="local:CustomCommands.Sign"
+						Width="75">
+					Sign
+				</Button>
+			</Grid>
+		</Grid>
+	</DockPanel>
 </Window>

@@ -57,7 +57,7 @@ namespace Crypto.Infrastructure
 
 			return true;
 		}
-
+		
 		/// <summary>
 		/// Converts a bit array to a byte.
 		/// </summary>

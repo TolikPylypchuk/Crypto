@@ -66,10 +66,11 @@ namespace Crypto.Systems
 
 			int length = key.Value.N.NumberOfDigits();
 
-			return String.Join("", encodedMessage.SplitByLength(length - 1)
+			return encodedMessage.SplitByLength(length - 1)
 				.Select(Int32.Parse)
 				.Select(num => Algorithms.Modulo(num, key.Value.Value, key.Value.N))
-				.Select(num => num.ToString($"D{length}")));
+				.Select(num => num.ToString($"D{length}"))
+				.Aggregate(String.Empty, (acc, s) => acc + s);
 		}
 
 		/// <summary>
@@ -89,11 +90,11 @@ namespace Crypto.Systems
 		{
 			this.ValidateParameters(ciphertext, key);
 
-			return new String(ciphertext.SplitByLength(key.Value.N.NumberOfDigits())
+			return ciphertext.SplitByLength(key.Value.N.NumberOfDigits())
 				.Select(Int32.Parse)
 				.Select(num => Algorithms.Modulo(num, key.Value.Value, key.Value.N))
 				.Select(num => this.Alphabet[num])
-				.ToArray());
+				.Aggregate(String.Empty, (acc, ch) => acc + ch);
 		}
 
 		/// <summary>
