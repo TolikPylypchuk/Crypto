@@ -11,8 +11,6 @@
 	<Window.CommandBindings>
 		<CommandBinding Command="Open"
 		                Executed="Open_Executed" />
-		<CommandBinding Command="local:CustomCommands.Exit"
-		                Executed="Exit_Executed" />
 		<CommandBinding Command="local:CustomCommands.Encrypt"
 		                Executed="Encrypt_Executed"
 		                CanExecute="RSACommand_CanExecute" />
@@ -22,6 +20,11 @@
 		<CommandBinding Command="local:CustomCommands.Sign"
 						Executed="Sign_Executed"
 						CanExecute="RSACommand_CanExecute" />
+		<CommandBinding Command="local:CustomCommands.Check"
+						Executed="Check_Executed"
+						CanExecute="RSACommand_CanExecute" />
+		<CommandBinding Command="local:CustomCommands.Exit"
+						Executed="Exit_Executed" />
 	</Window.CommandBindings>
 
 	<DockPanel>
@@ -34,7 +37,9 @@
 			<MenuItem Header="RSA">
 				<MenuItem Command="local:CustomCommands.Encrypt" />
 				<MenuItem Command="local:CustomCommands.Decrypt" />
+				<Separator />
 				<MenuItem Command="local:CustomCommands.Sign" />
+				<MenuItem Command="local:CustomCommands.Check" />
 			</MenuItem>
 		</Menu>
 
@@ -45,18 +50,24 @@
 				<RowDefinition />
 			</Grid.RowDefinitions>
 
-			<StackPanel Grid.Row="0" Orientation="Horizontal"
-						HorizontalAlignment="Center">
-				<TextBlock VerticalAlignment="Center" Margin="5">
-					Plaintext File:
+			<Grid Grid.Row="0" HorizontalAlignment="Stretch">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="40" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="75" />
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="5"
+				           HorizontalAlignment="Right">
+					File:
 				</TextBlock>
-				<TextBox Width="250" VerticalAlignment="Center" Margin="10"
-						 Text="{Binding Path=PlaintextPath, Mode=TwoWay}" />
-				<Button Command="Open" VerticalAlignment="Center"
-				        Padding="5,2">
+				<TextBox Grid.Column="1" VerticalAlignment="Center" Margin="5"
+				         HorizontalAlignment="Stretch"
+				         Text="{Binding Path=Path, Mode=TwoWay}" />
+				<Button Grid.Column="2" Command="Open" VerticalAlignment="Center"
+				        Padding="5,2" Margin="5">
 					Browse...
 				</Button>
-			</StackPanel>
+			</Grid>
 
 			<StackPanel Grid.Row="1" Orientation="Horizontal"
 			            HorizontalAlignment="Center">
@@ -65,7 +76,6 @@
 						  VerticalAlignment="Center"
 						  ItemsSource="{Binding Path=AlphabetsList}"
 						  DisplayMemberPath="Name"
-						  SelectedIndex="0"
 						  SelectedItem="{Binding Path=Alphabet, Mode=TwoWay}" />
 
 				<TextBlock VerticalAlignment="Center" Margin="15,5,5,5">
@@ -93,6 +103,7 @@
 					<ColumnDefinition />
 					<ColumnDefinition />
 					<ColumnDefinition />
+					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
 
 				<Button Grid.Column="0" HorizontalAlignment="Center"
@@ -112,6 +123,12 @@
 						Command="local:CustomCommands.Sign"
 						Width="75">
 					Sign
+				</Button>
+				<Button Grid.Column="3" HorizontalAlignment="Center"
+						VerticalAlignment="Center" Padding="10,4"
+						Command="local:CustomCommands.Check"
+						Width="75">
+					Check
 				</Button>
 			</Grid>
 		</Grid>

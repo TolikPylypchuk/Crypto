@@ -8,6 +8,7 @@ namespace Crypto.Signature
 		public static RoutedUICommand Encrypt { get; }
 		public static RoutedUICommand Decrypt { get; }
 		public static RoutedUICommand Sign { get; }
+		public static RoutedUICommand Check { get; }
 
 		static CustomCommands()
 		{
@@ -26,6 +27,10 @@ namespace Crypto.Signature
 			Sign = new RoutedUICommand(
 				"Sign", nameof(Sign), typeof(CustomCommands));
 			Sign.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
+
+			Check = new RoutedUICommand(
+				"Check", nameof(Check), typeof(CustomCommands));
+			Check.InputGestures.Add(new KeyGesture(Key.C, ModifierKeys.Control));
 		}
 	}
 }

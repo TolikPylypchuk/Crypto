@@ -7,7 +7,7 @@ namespace Crypto.Signature
 	{
 		#region Dependency properties
 
-		public static readonly DependencyProperty PlaintextPathProperty;
+		public static readonly DependencyProperty PathProperty;
 		public static readonly DependencyProperty NProperty;
 		public static readonly DependencyProperty EProperty;
 		public static readonly DependencyProperty DProperty;
@@ -20,8 +20,8 @@ namespace Crypto.Signature
 
 		static MainViewModel()
 		{
-			PlaintextPathProperty = DependencyProperty.Register(
-				nameof(PlaintextPath),
+			PathProperty = DependencyProperty.Register(
+				nameof(Path),
 				typeof(string),
 				typeof(MainViewModel));
 			
@@ -71,10 +71,10 @@ namespace Crypto.Signature
 
 		#region Properties
 
-		public string PlaintextPath
+		public string Path
 		{
-			get => (string)this.GetValue(PlaintextPathProperty);
-			set => this.SetValue(PlaintextPathProperty, value);
+			get => (string)this.GetValue(PathProperty);
+			set => this.SetValue(PathProperty, value);
 		}
 		
 		public int N

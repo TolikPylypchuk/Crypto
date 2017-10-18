@@ -181,10 +181,7 @@ namespace Crypto.App
 		{
 			this.model.Ciphertext = system.Encrypt(this.model.Plaintext, key);
 			this.ciphertextTextBox.Text =
-				this.model.Ciphertext
-//					.Select(ch => Char.IsControl(ch) ? '\u25A1' : ch)
-//					.Aggregate(String.Empty, (acc, ch) => acc + ch)
-					;
+				this.model.Ciphertext;
 		}
 
 		private void Decrypt<T>(ICryptosystem<T> system, Key<T> key)

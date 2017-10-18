@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -58,19 +57,24 @@ namespace Crypto.Systems
 		{
 			this.ValidateParameters(plaintext, key, true);
 
-			int padding = (this.Alphabet.Length - 1).NumberOfDigits();
+			int alphabetLength = (this.Alphabet.Length - 1).NumberOfDigits();
+			int keyLength = key.Value.N.NumberOfDigits();
 
-			string encodedMessage = this.Encode(plaintext).Aggregate(
-				String.Empty,
-				(prev, curr) => prev + curr.ToString($"D{padding}"));
-
-			int length = key.Value.N.NumberOfDigits();
-
-			return encodedMessage.SplitByLength(length - 1)
+			return plaintext
+				.Select(this.Alphabet.IndexOf)
+				.Select(num => num.ToString($"D{alphabetLength}"))
+				.Aggregate(String.Empty, (acc, s) => acc + s)
+				.SplitByLength(keyLength - 1)
 				.Select(Int32.Parse)
 				.Select(num => Algorithms.Modulo(num, key.Value.Value, key.Value.N))
-				.Select(num => num.ToString($"D{length}"))
-				.Aggregate(String.Empty, (acc, s) => acc + s);
+				.Dump()
+				.Select(num => num.ToString($"D{alphabetLength}"))
+				.Aggregate(String.Empty, (acc, s) => acc + s)
+				.Print()
+				.SplitByLength(alphabetLength - 1)
+				.Select(Int32.Parse)
+				.Select(num => this.Alphabet[num])
+				.Aggregate(String.Empty, (acc, ch) => acc + ch);
 		}
 
 		/// <summary>
@@ -90,22 +94,25 @@ namespace Crypto.Systems
 		{
 			this.ValidateParameters(ciphertext, key);
 
-			return ciphertext.SplitByLength(key.Value.N.NumberOfDigits())
+			int keyLength = key.Value.N.NumberOfDigits();
+			int alphabetLength = (this.Alphabet.Length - 1).NumberOfDigits();
+			
+			return ciphertext
+				.Select(this.Alphabet.IndexOf)
+				.Select(num => num.ToString($"D{alphabetLength - 1}"))
+				.Aggregate(String.Empty, (acc, s) => acc + s)
+				.SplitByLength(keyLength)
 				.Select(Int32.Parse)
 				.Select(num => Algorithms.Modulo(num, key.Value.Value, key.Value.N))
+				.Select(num => num.ToString($"D{alphabetLength - 1}"))
+				.Aggregate(String.Empty, (acc, s) => acc + s)
+				.Print()
+				.SplitByLength(keyLength)
+				.Select(Int32.Parse)
 				.Select(num => this.Alphabet[num])
 				.Aggregate(String.Empty, (acc, ch) => acc + ch);
 		}
-
-		/// <summary>
-		/// Substitutes every character in the message
-		/// into its index in the alphabet.
-		/// </summary>
-		/// <param name="message">The message to encode.</param>
-		/// <returns>The encoded message.</returns>
-		private IEnumerable<int> Encode(IEnumerable<char> message)
-			=> message.Select(c => this.Alphabet.IndexOf(c));
-
+		
 		/// <summary>
 		/// Checks whether the parameters meet the system's requirements.
 		/// </summary>
@@ -140,17 +147,10 @@ namespace Crypto.Systems
 					"The key cannot be null.");
 			}
 
-			if (encrypting && !this.Alphabet.Belongs(message))
+			if (!this.Alphabet.Belongs(message))
 			{
 				throw new ArgumentException(
 					"The message does not belong to the system's alphabet.",
-					nameof(message));
-			}
-
-			if (!encrypting && !Alphabets.DecimalDigits.Belongs(message))
-			{
-				throw new ArgumentException(
-					"The message is not a number.",
 					nameof(message));
 			}
 		}

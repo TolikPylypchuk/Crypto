@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Crypto.Infrastructure
@@ -11,7 +12,7 @@ namespace Crypto.Infrastructure
 	public static class Extensions
 	{
 		/// <summary>
-		/// Splits the string into equal parts.
+		/// Splits a string into equal parts.
 		/// </summary>
 		/// <param name="str">The string to split.</param>
 		/// <param name="maxLength">The length of each part.</param>
@@ -25,6 +26,23 @@ namespace Crypto.Infrastructure
 				yield return str.Substring(
 					index, Math.Min(maxLength, str.Length - index));
 			}
+		}
+
+		public static IEnumerable<T> Dump<T>(this IEnumerable<T> collection)
+		{
+			foreach (var item in collection)
+			{
+				Debug.Write($"{item}; ");
+				yield return item;
+			}
+
+			Debug.WriteLine(String.Empty);
+		}
+
+		public static string Print(this string str)
+		{
+			Debug.WriteLine(str);
+			return str;
 		}
 
 		/// <summary>

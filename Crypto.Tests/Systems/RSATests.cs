@@ -30,11 +30,11 @@ namespace Crypto.Systems
 		{
 			var system = new RSA(Alphabets.EnglishLower);
 			
-			var key = new RSAKey((187, 7));
+			var key = new RSAKey((33, 7));
 
-			string ciphertext = system.Encrypt("agf", key);
+			string ciphertext = system.Encrypt("text", key);
 
-			Assert.AreEqual("000184146", ciphertext);
+			Assert.AreEqual("abbfaabgcjajabbf", ciphertext);
 		}
 
 		[TestMethod]
@@ -92,15 +92,15 @@ namespace Crypto.Systems
 		}
 
 		[TestMethod]
-		public void DeryptTest()
+		public void DecryptTest()
 		{
 			var system = new RSA(Alphabets.EnglishLower);
 
-			var key = new RSAKey((187, 23));
+			var key = new RSAKey((33, 3));
 
-			string plaintext = system.Decrypt("000184146", key);
+			string plaintext = system.Decrypt("abbfaabgcjajabbf", key);
 
-			Assert.AreEqual("agf", plaintext);
+			Assert.AreEqual("text", plaintext);
 		}
 
 		[TestMethod]
@@ -118,7 +118,7 @@ namespace Crypto.Systems
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void DecryptWithNullTest()
 		{
-			const string ciphertext = "000184146";
+			const string ciphertext = "aaabiebeg";
 
 			var system = new RSA(new Alphabet("ab"));
 
@@ -131,7 +131,7 @@ namespace Crypto.Systems
 		{
 			var key = new RSAKey((17, 11));
 
-			const string ciphertext = "a000184146";
+			const string ciphertext = "aaabiebeg";
 
 			var system = new RSA(new Alphabet("ab"))
 			{
@@ -147,7 +147,7 @@ namespace Crypto.Systems
 		{
 			var key = new RSAKey((17, 11));
 
-			const string ciphertext = "a000184146";
+			const string ciphertext = "aaabiebeg";
 
 			var system = new RSA(new Alphabet("ab"))
 			{
@@ -155,6 +155,20 @@ namespace Crypto.Systems
 			};
 
 			system.Decrypt(ciphertext, key);
+		}
+
+		[TestMethod]
+		public void AbsorbtionTest()
+		{
+			var encKey = new RSAKey((33, 7));
+			var decKey = new RSAKey((33, 3));
+			const string plaintext = "text";
+
+			var system = new RSA(Alphabets.EnglishLower);
+
+			Assert.AreEqual(
+				plaintext,
+				system.Decrypt(system.Encrypt(plaintext, encKey), decKey));
 		}
 	}
 }

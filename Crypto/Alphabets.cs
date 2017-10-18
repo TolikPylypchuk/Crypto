@@ -22,48 +22,48 @@ namespace Crypto
 
 			EnglishUpper = new Alphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 			{
-				Name = "Англійський (великі букви)"
+				Name = "English (uppercase)"
 			};
 
 			EnglishLower = new Alphabet("abcdefghijklmnopqrstuvwxyz")
 			{
-				Name = "Англійський (малі букви)"
+				Name = "English (lowercase)"
 			};
 
 			English = EnglishUpper + EnglishLower;
-			English.Name = "Англійський";
+			English.Name = "English";
 
 			UkrainianUpper = new Alphabet("АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ")
 			{
-				Name = "Український (великі букви)"
+				Name = "Ukrainian (uppercase)"
 			};
 
 			UkrainianLower = new Alphabet("абвгґдеєжзиіїйклмнопрстуфхцчшщьюя")
 			{
-				Name = "Український (малі букви)"
+				Name = "Ukrainian (lowercase)"
 			};
 
 			Ukrainian = UkrainianUpper + UkrainianLower;
-			Ukrainian.Name = "Український";
+			Ukrainian.Name = "Ukrainian";
 
 			Punctuation = new Alphabet(" .,;:!?/\\'\"-()`")
 			{
-				Name = "Пунктуація"
+				Name = "Punctuation"
 			};
 
 			DecimalDigits = new Alphabet("0123456789")
 			{
-				Name = "Цифри"
+				Name = "Digits"
 			};
 
 			BinaryDigits = new Alphabet("01")
 			{
-				Name = "Бінарні цифри"
+				Name = "Bits"
 			};
 
 			SpecialCharacters = new Alphabet("[]{}<>~@#$%^&*-_+=")
 			{
-				Name = "Спеціальні символи"
+				Name = "Special characters"
 			};
 
 			EnglishWithPunctuation = English + Punctuation;
